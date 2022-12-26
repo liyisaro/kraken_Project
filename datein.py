@@ -1,3 +1,5 @@
+# Selección por parte del usuario de la fecha a partir de la cual se desean las cotizaciones
+
 from tkinter import *
 from tkcalendar import Calendar
 from datetime import datetime

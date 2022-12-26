@@ -1,3 +1,5 @@
+# Funcion para que el usuario eliga de la lista desplegable de cotizaciones disponibles
+
 import tkinter as tk
 from tk import *
 
@@ -39,7 +41,9 @@ def fun_moneda():
     tk.Button(app, text="ok", command=app.destroy).pack()
 
     app.mainloop()
-    value1=list(dmoneda.keys())[list(dmoneda.values()).index(variable.get())]
-    value2=list(dmoneda.keys())[list(dmoneda.values()).index(variable2.get())]
+    value1=variable.get()
+    value2=variable2.get()
+    #value1=list(dmoneda.keys())[list(dmoneda.values()).index(variable.get())]
+    #value2=list(dmoneda.keys())[list(dmoneda.values()).index(variable2.get())]
 
     return(value1,value2)
