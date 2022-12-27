@@ -4,7 +4,11 @@ import krakenex
 import pandas as pd
 import time
 import platform
-from datetime import datetime
+import datetime
+from datetime import datetime, timedelta
+
+def tstamp2date(x):
+    return datetime.fromtimestamp(x)
 
 def fun_call_api(init_date,moneda_find):
     k = krakenex.API()
@@ -24,7 +28,7 @@ def fun_call_api(init_date,moneda_find):
             os.system('cls')
         time.sleep(1)
         print('Descargando cotizaciones, por favor espere...')
-
+    df= df.rename(columns={0: "PRICE", 1: "VOLUME", 2: "TIME", 3: "BUY/SELL", 4: "MARKET/LIMIT", 5: "miscellaneous", 6: "ID"})    
+    df['DATE_TIME']=df['TIME'].apply(tstamp2date)
     print('\033[1m'+"COTIACIONES DESCARGADAS"+'\033[0m')
-    print(init_date)
     return df
