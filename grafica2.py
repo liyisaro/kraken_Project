@@ -13,4 +13,4 @@ def rsiplot(df,moneda):
 
     except Exception as e:
         error = repr(e)
-        print('Error graficando RSI: ' + error)
+        print('Error al graficar RSI: ' + error)
