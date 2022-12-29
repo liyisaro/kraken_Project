@@ -1,11 +1,10 @@
 # Funcion para que el usuario eliga de la lista desplegable de cotizaciones disponibles
 
 import tkinter as tk
-from tk import *
 
 def fun_moneda():
     try:
-        with open('monedalist.txt', 'r') as dict_file:
+        with open('monedalist.txt', 'r') as dict_file:      # Lectura del txt con monedas disponibles
             dict_text = dict_file.read()
             dict_from_file = eval(dict_text)
         dmoneda = {}
@@ -15,41 +14,30 @@ def fun_moneda():
 
 
         for k in dmoneda.values():
-            OptionList.append(k)
+            OptionList.append(k)        # Cadena a mostrar en la lista desplegable
 
-        app = tk.Tk()
+        app = tk.Tk()       # Creación del objeto
 
-        app.geometry('100x200')
+        app.geometry('100x200')       # Definir tamaño de la interfaz grafica para la lista desplegable
 
-        variable = tk.StringVar(app)
-        #variable2 = tk.StringVar(app)
+        variable = tk.StringVar(app)  # Definir el objeto como una lista desplegable
 
-        variable.set(OptionList[0])
-        #variable2.set(OptionList[0])
+        variable.set(OptionList[0])   # Fijar un valor por defecto en la lista al iniciar la aplicacion
 
-        opt = tk.OptionMenu(app, variable, *OptionList)
+        opt = tk.OptionMenu(app, variable, *OptionList)  # Confirguración visual de la lista desplegable
         opt.config(width=90, font=('Helvetica', 12))
         opt.pack(side="top")
 
-        #opt2 = tk.OptionMenu(app, variable2, *OptionList)
-        #opt2.config(width=90, font=('Helvetica', 12))
-        #opt2.pack(side="top")
-
         labelTest = tk.Label()
 
-        #variable.trace("w",'callback')
-
-        tk.Button(app, text="ok", command=app.destroy).pack()
+        tk.Button(app, text="ok", command=app.destroy).pack()  # Creación de boton para confirmar seleccion de monedas
 
         app.mainloop()
-        #value1=variable.get()
-        #value2=variable2.get()
-        value1=list(dmoneda.keys())[list(dmoneda.values()).index(variable.get())]
-        #value2=list(dmoneda.keys())[list(dmoneda.values()).index(variable2.get())]
-        #print(value1)
-        #print(value2)
+
+        value1 = list(dmoneda.keys())[list(dmoneda.values()).index(variable.get())]  # Almacenar la selección en una variable
+
         return(value1,variable.get())
 
-    except Exception as e:
+    except Exception as e:      # Manejo de excepciones
         error = repr(e)
         print('Error obteniendo los pares de monedas disponibles: ' + error)
