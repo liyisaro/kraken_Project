@@ -12,15 +12,20 @@ def tstamp2date(x):
 
 def fun_call_api(init_date,moneda_find):
     try:
+        # Creación de objeto para guardar la respuesta de la API
         k = krakenex.API()
         k.load_key('kraken.key')
         df = pd.DataFrame(columns=[0, 1, 2, 3, 4, 5, 6])
 
+        # Cambiar al formato de fecha compatible con la API (init_date a timestamp)
         init_date = datetime.timestamp(init_date)
+
+        # Enviar query con el par de monedas seleccionadas de la lista desplegable
         balance = k.query_public('Trades?pair=' + moneda_find)
         end_date = pd.DataFrame(balance['result'][moneda_find])[2].max()-1
         sistema = platform.system()
 
+        # Loop para poblar el dataframe con la serie temporal disponible en la API
         while init_date <= end_date:
             balance = k.query_public('Trades?pair='+moneda_find+'&since='+str(init_date))
             df = df.append(balance['result'][moneda_find], ignore_index=True)
@@ -34,6 +39,7 @@ def fun_call_api(init_date,moneda_find):
         print('\033[1m'+"COTIACIONES DESCARGADAS"+'\033[0m')
         return df
 
+    # Manejo de excepciones
     except Exception as e:
         error = repr(e)
         print('Error al llamar la API de Kraken: ' + error)
