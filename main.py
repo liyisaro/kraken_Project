@@ -1,17 +1,19 @@
-# This is a sample Python script.
+import datein
+import llamar_api
+import monedain
+import grafica1
+import grafica2
+import grafica3
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+init_date=datein.fun_init_date()
 
+moneda = monedain.fun_moneda()
+#moneda_find = moneda[0]+moneda[1]
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+df = llamar_api.fun_call_api(init_date, moneda[0])
 
+grafica1.plot1(df,moneda[1])
+grafica2.rsiplot(df,moneda[1])
+grafica3.plot2(df,moneda[1])
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
 
